@@ -68,7 +68,7 @@ export default function App() {
     <>
       <NavBar query={query} setQuery={setQuery} movies={movies} />
       <main className="main">
-        <MovieList/>
+        <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1} movies={movies}/>
         <div className="box">
           <button
             className="btn-toggle"
