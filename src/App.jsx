@@ -3,6 +3,7 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import MovieList from "./components/MovieList";
 import WatchedMovieList from "./components/WatchedMovieList";
+import Logo from "./components/Logo";
 
 const tempMovieData = [
   {
@@ -67,10 +68,19 @@ export default function App() {
 
   return (
     <>
-      <NavBar query={query} setQuery={setQuery} movies={movies} />
+      <NavBar>
+        <Logo />
+      </NavBar>
       <main className="main">
-        <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1} movies={movies}/>
-        <WatchedMovieList isOpen2={isOpen2} setIsOpen2={setIsOpen2} watched={watched} avgImdbRating={avgImdbRating} avgRuntime={avgRuntime} avgUserRating={avgUserRating}/>
+        <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1} movies={movies} />
+        <WatchedMovieList
+          isOpen2={isOpen2}
+          setIsOpen2={setIsOpen2}
+          watched={watched}
+          avgImdbRating={avgImdbRating}
+          avgRuntime={avgRuntime}
+          avgUserRating={avgUserRating}
+        />
       </main>
     </>
   );

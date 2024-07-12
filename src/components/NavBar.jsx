@@ -1,8 +1,12 @@
 import React from 'react'
 
-const NavBar = ({query, setQuery, movies}) => {
+const NavBar = ({children}) => {
   return (
-    <nav className="nav-bar">
+    {children}
+  )
+}
+
+/*    <nav className="nav-bar">
         <div className="logo">
           <span role="img">🍿</span>
           <h1>usePopcorn</h1>
@@ -18,8 +22,6 @@ const NavBar = ({query, setQuery, movies}) => {
           Found <strong>{movies.length}</strong> results
         </p>
       </nav>
-
-  )
-}
+      */
 
 export default NavBar

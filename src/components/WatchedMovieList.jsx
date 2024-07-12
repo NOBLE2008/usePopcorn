@@ -6,7 +6,7 @@ const WatchedMovieList = ({
   watched,
   avgImdbRating,
   avgUserRating,
-  avgRuntime
+  avgRuntime,
 }) => {
   return (
     <div className="box">
