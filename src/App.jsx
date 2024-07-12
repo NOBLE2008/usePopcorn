@@ -70,7 +70,7 @@ export default function App() {
       <NavBar query={query} setQuery={setQuery} movies={movies} />
       <main className="main">
         <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1} movies={movies}/>
-        <WatchedMovieList />
+        <WatchedMovieList isOpen2={isOpen2} setIsOpen2={setIsOpen2} watched={watched} avgImdbRating={avgImdbRating} avgRuntime={avgRuntime} avgUserRating={avgUserRating}/>
       </main>
     </>
   );
