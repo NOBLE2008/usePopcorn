@@ -5,6 +5,7 @@ import MovieList from "./components/MovieList";
 import WatchedMovieList from "./components/WatchedMovieList";
 import Logo from "./components/Logo";
 import Search from "./components/Search";
+import NumResults from "./components/NumResults";
 
 const tempMovieData = [
   {
@@ -72,6 +73,7 @@ export default function App() {
       <NavBar>
         <Logo />
         <Search query={query} setQuery={setQuery}/>
+        <NumResults movies={movies}/>
       </NavBar>
       <main className="main">
         <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1} movies={movies} />
