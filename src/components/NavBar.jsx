@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NavBar = () => {
+const NavBar = ({query, setQuery, movies}) => {
   return (
     <nav className="nav-bar">
         <div className="logo">

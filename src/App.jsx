@@ -65,7 +65,7 @@ export default function App() {
 
   return (
     <>
-      <NavBar/>
+      <NavBar query={query} setQuery={setQuery} movies={movies}/>
       <main className="main">
         <div className="box">
           <button
