@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "./Logo";
 
-const Search = () => {
+const Search = ({query, setQuery}) => {
   return (
     <input
       className="search"
