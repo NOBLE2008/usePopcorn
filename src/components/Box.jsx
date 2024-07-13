@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Box = ({childern}) => {
+const Box = ({children}) => {
   return (
     <div className='box'>
-      {childern}
+      {children}
     </div>
   )
 }
