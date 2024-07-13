@@ -10,7 +10,7 @@ const WatchedMovieList = ({
   avgRuntime,
 }) => {
   return (
-    <div className="box">
+    <>
       <Button
         className="btn-toggle"
         onClick={() => setIsOpen2((open) => !open)}
@@ -65,7 +65,7 @@ const WatchedMovieList = ({
           </ul>
         </>
       )}
-    </div>
+      </>
   );
 };
 
