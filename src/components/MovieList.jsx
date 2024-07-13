@@ -1,14 +1,15 @@
 import React from 'react'
+import Button from './Button'
 
 const MovieList = ({setIsOpen1, isOpen1, movies}) => {
   return (
     <div className="box">
-          <button
+          <Button
             className="btn-toggle"
             onClick={() => setIsOpen1((open) => !open)}
           >
             {isOpen1 ? "–" : "+"}
-          </button>
+          </Button>
           {isOpen1 && (
             <ul className="list">
               {movies?.map((movie) => (
