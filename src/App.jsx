@@ -7,6 +7,7 @@ import Logo from "./components/Logo";
 import Search from "./components/Search";
 import NumResults from "./components/NumResults";
 import Main from "./components/Main";
+import Box from "./components/Box";
 
 const tempMovieData = [
   {
@@ -77,15 +78,8 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
       <Main>
-      <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1} movies={movies} />
-        <WatchedMovieList
-          isOpen2={isOpen2}
-          setIsOpen2={setIsOpen2}
-          watched={watched}
-          avgImdbRating={avgImdbRating}
-          avgRuntime={avgRuntime}
-          avgUserRating={avgUserRating}
-        />
+        <Box></Box>
+        <Box></Box>
       </Main>
     </>
   );
