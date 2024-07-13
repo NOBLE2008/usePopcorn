@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 const WatchedMovieList = ({
   isOpen2,
@@ -10,12 +11,12 @@ const WatchedMovieList = ({
 }) => {
   return (
     <div className="box">
-      <button
+      <Button
         className="btn-toggle"
         onClick={() => setIsOpen2((open) => !open)}
       >
         {isOpen2 ? "–" : "+"}
-      </button>
+      </Button>
       {isOpen2 && (
         <>
           <div className="summary">
