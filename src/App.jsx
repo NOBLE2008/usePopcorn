@@ -78,7 +78,9 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
       <Main>
-        <Box></Box>
+        <Box>
+        <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1} movies={movies} />
+        </Box>
         <Box></Box>
       </Main>
     </>
