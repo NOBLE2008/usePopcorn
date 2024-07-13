@@ -85,7 +85,16 @@ export default function App() {
             movies={movies}
           />
         </Box>
-        <Box></Box>
+        <Box>
+          <WatchedMovieList
+            isOpen2={isOpen2}
+            setIsOpen2={setIsOpen2}
+            watched={watched}
+            avgImdbRating={avgImdbRating}
+            avgRuntime={avgRuntime}
+            avgUserRating={avgUserRating}
+          />
+        </Box>
       </Main>
     </>
   );
