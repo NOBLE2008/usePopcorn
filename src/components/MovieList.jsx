@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 
-const MovieList = ({setIsOpen1, isOpen1, movies, children}) => {
+const MovieList = ({setIsOpen1, isOpen1, children}) => {
   return (
     <>
           <Button
