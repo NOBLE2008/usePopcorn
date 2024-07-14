@@ -8,6 +8,7 @@ import Search from "./components/Search";
 import NumResults from "./components/NumResults";
 import Main from "./components/Main";
 import Box from "./components/Box";
+import Movie from "./components/Movie";
 
 const tempMovieData = [
   {
@@ -79,10 +80,9 @@ export default function App() {
       </NavBar>
       <Main>
         <Box>
-          <MovieList
-            setIsOpen1={setIsOpen1}
-            isOpen1={isOpen1}
-          />
+          <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1}>
+            <Movie/>
+          </MovieList>
         </Box>
         <Box>
           <WatchedMovieList
