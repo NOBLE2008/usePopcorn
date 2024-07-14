@@ -81,7 +81,9 @@ export default function App() {
       <Main>
         <Box>
           <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1}>
-            <Movie movie={movies}/>
+            {movies.map((movie, i) => (
+              <Movie movie={movie} key={i} />
+            ))}
           </MovieList>
         </Box>
         <Box>
