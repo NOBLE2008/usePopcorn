@@ -82,7 +82,6 @@ export default function App() {
           <MovieList
             setIsOpen1={setIsOpen1}
             isOpen1={isOpen1}
-            movies={movies}
           />
         </Box>
         <Box>
