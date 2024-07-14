@@ -1,6 +1,6 @@
 import React from "react";
 
-const Movie = () => {
+const Movie = ({movie}) => {
   return (
     <li key={movie.imdbID}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
