@@ -8,6 +8,7 @@ const WatchedMovieList = ({
   avgImdbRating,
   avgUserRating,
   avgRuntime,
+  children
 }) => {
   return (
     <>
@@ -41,14 +42,10 @@ const WatchedMovieList = ({
             </div>
           </div>
 
-          <ul className="list">
-            {watched.map((movie) => (
-              
-            ))}
-          </ul>
+          <ul className="list">{children}</ul>
         </>
       )}
-      </>
+    </>
   );
 };
 

@@ -9,6 +9,7 @@ import NumResults from "./components/NumResults";
 import Main from "./components/Main";
 import Box from "./components/Box";
 import Movie from "./components/Movie";
+import WatchedMovie from "./components/WatchedMovie";
 
 const tempMovieData = [
   {
@@ -94,7 +95,11 @@ export default function App() {
             avgImdbRating={avgImdbRating}
             avgRuntime={avgRuntime}
             avgUserRating={avgUserRating}
-          />
+          >
+            {watched.map((movie, i) => (
+              <WatchedMovie movie={movie} key={i} />
+            ))}
+          </WatchedMovieList>
         </Box>
       </Main>
     </>
