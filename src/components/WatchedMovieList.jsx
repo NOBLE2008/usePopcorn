@@ -8,7 +8,7 @@ const WatchedMovieList = ({
   avgImdbRating,
   avgUserRating,
   avgRuntime,
-  children
+  children,
 }) => {
   return (
     <>
