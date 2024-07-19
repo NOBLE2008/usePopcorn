@@ -70,7 +70,9 @@ export default function App() {
 
   useEffect(function () {
     async function fetchData() {
-      const res = fetch("http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar")
+      const res = await fetch(
+        "http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar"
+      );
       const data = await res.json();
       setMovies(data.Search);
     }
