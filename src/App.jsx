@@ -68,9 +68,11 @@ export default function App() {
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
-  fetch("http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar")
-    .then((res) => res.json())
-    .then((data) => setMovies(data.Search));
+  useEffect(() => {
+    fetch("http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar")
+      .then((res) => res.json())
+      .then((data) => setMovies(data.Search));
+  }, []);
 
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
