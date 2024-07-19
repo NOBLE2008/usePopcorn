@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Loader = () => {
   return (
     <div className="loader">
-        <img src='Loader.gif'/>
+      <img src="Loader.gif" />
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;
