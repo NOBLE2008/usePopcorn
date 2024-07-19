@@ -11,6 +11,7 @@ import Box from "./components/Box";
 import Movie from "./components/Movie";
 import WatchedMovie from "./components/WatchedMovie";
 import Loader from "./components/Loader";
+import ErrorMessage from "./components/ErrorMessage";
 
 const tempMovieData = [
   {
@@ -66,19 +67,29 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState("");
   const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
   useEffect(function () {
     async function fetchData() {
-      setIsLoading(true);
-      const res = await fetch(
-        "http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar"
-      );
-      const data = await res.json();
-      setMovies(data.Search);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          "http://www.omdbapi.com/?apikey=897bf7b3&s=titanic"
+        ).catch((err) => {
+          throw new Error("Error Fetching Movies 🔍");
+        });
+
+        if (!res.ok) console.log("Error Fetching Movies 🔍");
+        const data = await res.json();
+        setMovies(data.Search);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchData();
   }, []);
@@ -97,15 +108,19 @@ export default function App() {
       <Main>
         <Box>
           <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1}>
-            {isLoading ? (
-              <Loader />
-            ) : (
+            {isLoading && (
+              <div className="loader">
+                <Loader />
+              </div>
+            )}
+            {!isLoading && !error && (
               <ul className="list">
                 {movies.map((movie, i) => (
                   <Movie movie={movie} key={i} />
                 ))}
               </ul>
             )}
+            {error && <div className="error"><ErrorMessage message={error} /></div>}
           </MovieList>
         </Box>
         <Box>
