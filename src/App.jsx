@@ -10,6 +10,7 @@ import Main from "./components/Main";
 import Box from "./components/Box";
 import Movie from "./components/Movie";
 import WatchedMovie from "./components/WatchedMovie";
+import Loader from "./components/Loader";
 
 const tempMovieData = [
   {
@@ -63,7 +64,7 @@ const average = (arr) =>
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen1, setIsOpen1] = useState(true);
@@ -71,13 +72,13 @@ export default function App() {
 
   useEffect(function () {
     async function fetchData() {
-      setIsLoading(true)
+      setIsLoading(true);
       const res = await fetch(
         "http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar"
       );
       const data = await res.json();
       setMovies(data.Search);
-      setIsLoading(false)
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -96,9 +97,15 @@ export default function App() {
       <Main>
         <Box>
           <MovieList setIsOpen1={setIsOpen1} isOpen1={isOpen1}>
-            {movies.map((movie, i) => (
-              <Movie movie={movie} key={i} />
-            ))}
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <ul className="list">
+                {movies.map((movie, i) => (
+                  <Movie movie={movie} key={i} />
+                ))}
+              </ul>
+            )}
           </MovieList>
         </Box>
         <Box>
