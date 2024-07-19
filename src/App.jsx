@@ -71,6 +71,7 @@ export default function App() {
 
   useEffect(function () {
     async function fetchData() {
+      setIsLoading(true)
       const res = await fetch(
         "http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar"
       );
