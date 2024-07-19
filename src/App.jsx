@@ -63,15 +63,18 @@ const average = (arr) =>
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState(tempMovieData);
+  const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
-  useEffect(() => {
-    fetch("http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar")
-      .then((res) => res.json())
-      .then((data) => setMovies(data.Search));
+  useEffect(function () {
+    async function fetchData() {
+      const res = fetch("http://www.omdbapi.com/?apikey=897bf7b3&s=interstellar")
+      const data = await res.json();
+      setMovies(data.Search);
+    }
+    fetchData();
   }, []);
 
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
