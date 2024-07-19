@@ -63,6 +63,7 @@ const average = (arr) =>
 
 export default function App() {
   const [query, setQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen1, setIsOpen1] = useState(true);
