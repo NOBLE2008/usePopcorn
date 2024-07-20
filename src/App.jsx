@@ -65,6 +65,7 @@ const average = (arr) =>
 
 export default function App() {
   const [query, setQuery] = useState("");
+  const [sdlectedId, setSelectedId] = useState(null)
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
@@ -125,7 +126,7 @@ export default function App() {
               </div>
             )}
             {!isLoading && !error && query && (
-              <ul className="list">
+              <ul className="list list-movies">
                 {movies.map((movie, i) => (
                   <Movie movie={movie} key={i} />
                 ))}
