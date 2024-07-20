@@ -111,6 +111,13 @@ export default function App() {
         <Box>
           {selectedId ? (
             <MovieDetail
+              selectedId={selectedId}
+              watched={watched}
+              setWatched={setWatched}
+              setSelectedId={setSelectedId}
+              onCloseMovieDetail={() => {
+                setSelectedId(null);
+              }}
             />
           ) : (
             <WatchedMovieList
