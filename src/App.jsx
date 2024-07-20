@@ -75,9 +75,10 @@ export default function App() {
   useEffect(function () {
     async function fetchData() {
       try {
+        if (!query) return;
         setIsLoading(true);
         const res = await fetch(
-          "http://www.omdbapi.com/?apikey=897bf7b3&s=titanic"
+          `http://www.omdbapi.com/?apikey=897bf7b3&s=${query}`
         ).catch((err) => {
           throw new Error("Error Fetching Movies 🔍");
         });
