@@ -1,0 +1,7 @@
+.star-container, .stars{
+  display: flex;
+}
+
+.star-container{
+  gap: 5px;
+}
