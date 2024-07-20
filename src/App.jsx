@@ -76,6 +76,7 @@ export default function App() {
     async function fetchData() {
       try {
         if (!query) return;
+        setError("");
         setIsLoading(true);
         const res = await fetch(
           `http://www.omdbapi.com/?apikey=897bf7b3&s=${query}`
@@ -85,6 +86,7 @@ export default function App() {
 
         if (!res.ok) throw new Error("Error Fetching Movies 🔍");
         const data = await res.json();
+        console.log(data)
         if (data.Response == 'False') throw new Error('No Result Found')
         setMovies(data.Search);
       } catch (err) {
