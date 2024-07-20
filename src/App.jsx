@@ -65,7 +65,7 @@ const average = (arr) =>
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [sdlectedId, setSelectedId] = useState(null)
+  const [sdlectedId, setSelectedId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
@@ -73,38 +73,41 @@ export default function App() {
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
-  useEffect(function () {
-    async function fetchData() {
-      try {
-        if (!query) {
-          setError("")
-          setMovies([])
-          return;
-        }
-        setError("");
-        setIsLoading(true);
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=897bf7b3&s=${query}`
-        ).catch((err) => {
-          throw new Error("Error Fetching Movies 🔍");
-        });
+  useEffect(
+    function () {
+      async function fetchData() {
+        try {
+          if (!query) {
+            setError("");
+            setMovies([]);
+            return;
+          }
+          setError("");
+          setIsLoading(true);
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=897bf7b3&s=${query}`
+          ).catch((err) => {
+            throw new Error("Error Fetching Movies 🔍");
+          });
 
-        if (!res.ok) throw new Error("Error Fetching Movies 🔍");
-        const data = await res.json();
-        console.log(data)
-        if (data.Response == 'False') {
-          setMovies([])
-          throw new Error('No Result Found')
+          if (!res.ok) throw new Error("Error Fetching Movies 🔍");
+          const data = await res.json();
+          console.log(data);
+          if (data.Response == "False") {
+            setMovies([]);
+            throw new Error("No Result Found");
+          }
+          setMovies(data.Search);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
         }
-        setMovies(data.Search);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
       }
-    }
-    fetchData();
-  }, [query]);
+      fetchData();
+    },
+    [query]
+  );
 
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
@@ -132,8 +135,16 @@ export default function App() {
                 ))}
               </ul>
             )}
-            {error && <div className="error"><ErrorMessage message={error} /></div>}
-            {!query && <div className="error"><p>Start searching for Movies</p></div>}
+            {error && (
+              <div className="error">
+                <ErrorMessage message={error} />
+              </div>
+            )}
+            {!query && (
+              <div className="error">
+                <p>Start searching for Movies</p>
+              </div>
+            )}
           </MovieList>
         </Box>
         <Box>
