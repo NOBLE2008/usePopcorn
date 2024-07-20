@@ -113,7 +113,7 @@ export default function App() {
                 <Loader />
               </div>
             )}
-            {!isLoading && !error && (
+            {!isLoading && !error && query && (
               <ul className="list">
                 {movies.map((movie, i) => (
                   <Movie movie={movie} key={i} />
@@ -121,6 +121,7 @@ export default function App() {
               </ul>
             )}
             {error && <div className="error"><ErrorMessage message={error} /></div>}
+            {!query && <div className="error"><p>Start searching for Movies</p></div>}
           </MovieList>
         </Box>
         <Box>
