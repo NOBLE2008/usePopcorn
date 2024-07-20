@@ -75,7 +75,11 @@ export default function App() {
   useEffect(function () {
     async function fetchData() {
       try {
-        if (!query) return;
+        if (!query) {
+          setError("")
+          setMovies([])
+          return;
+        }
         setError("");
         setIsLoading(true);
         const res = await fetch(
@@ -87,7 +91,10 @@ export default function App() {
         if (!res.ok) throw new Error("Error Fetching Movies 🔍");
         const data = await res.json();
         console.log(data)
-        if (data.Response == 'False') throw new Error('No Result Found')
+        if (data.Response == 'False') {
+          setMovies([])
+          throw new Error('No Result Found')
+        }
         setMovies(data.Search);
       } catch (err) {
         setError(err.message);
