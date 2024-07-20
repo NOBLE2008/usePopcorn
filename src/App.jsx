@@ -83,8 +83,9 @@ export default function App() {
           throw new Error("Error Fetching Movies 🔍");
         });
 
-        if (!res.ok) console.log("Error Fetching Movies 🔍");
+        if (!res.ok) throw new Error("Error Fetching Movies 🔍");
         const data = await res.json();
+        if (data.Response == 'False') throw new Error('No Result Found')
         setMovies(data.Search);
       } catch (err) {
         setError(err.message);
