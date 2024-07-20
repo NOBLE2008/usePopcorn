@@ -5,6 +5,7 @@ import StarRating from "./StarRating";
 const MovieDetail = ({
   selectedId,
   onCloseMovieDetail,
+  onDeleteWatched,
   setSelectedId,
   watched,
   setWatched,
@@ -24,12 +25,13 @@ const MovieDetail = ({
           setIsLoading(true);
           const res = await fetch(
             `http://www.omdbapi.com/?apikey=897bf7b3&i=${selectedId}`
-          );
+          ).catch((err) => {
+            setError("Error fetching movie details");
+          });
           const data = await res.json();
-          console.log(data);
           setMovie(data);
         } catch {
-          (err) => setError("vinqv");
+          (err) => setError("Error Fetching");
         } finally {
           setIsLoading(false);
         }
@@ -50,16 +52,26 @@ const MovieDetail = ({
     Director: director,
   } = movie;
 
+  useEffect(function (){
+    if(!title) return;
+    document.title = `Movie | ${title}`
+
+    return function (){
+        document.title = "usePopcorn"
+    }
+  }, [title])
+
   const handleAdd = () => {
     setWatched((cur) => {
       return [
+        ...cur,
         {
           Poster: poster,
           imdbID: selectedId,
           Title: title,
           imdbRating,
           userRating,
-          runtime,
+          runtime: Number(runtime.split(" ")[0]),
         },
       ];
     });
@@ -68,7 +80,7 @@ const MovieDetail = ({
 
   const isWatched = watched?.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched?.find(
-    (cur) => cur.id == selectedId
+    (cur) => cur.imdbID == selectedId
   )?.userRating;
   return (
     <div className="details">
@@ -112,7 +124,7 @@ const MovieDetail = ({
                 </>
               ) : (
                 <p>
-                  You rated with movie {watchedUserRating} <span>⭐️</span>
+                  You rated this movie {watchedUserRating} <span>⭐️</span>
                 </p>
               )}
             </div>

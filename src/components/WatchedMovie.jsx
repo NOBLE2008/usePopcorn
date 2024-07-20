@@ -1,6 +1,6 @@
 import React from "react";
 
-const WatchedMovie = ({ movie }) => {
+const WatchedMovie = ({ movie, onDeleteWatched }) => {
   return (
     <li key={movie.imdbID}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
@@ -19,6 +19,7 @@ const WatchedMovie = ({ movie }) => {
           <span>{movie.runtime} min</span>
         </p>
       </div>
+      <button className="btn-delete" onClick={onDeleteWatched(movie.imdbID)}>X</button>
     </li>
   );
 };

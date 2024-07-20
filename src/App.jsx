@@ -14,7 +14,6 @@ import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
 import MovieDetail from "./components/MovieDetail";
 
-
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
@@ -27,7 +26,6 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
-
   useEffect(
     function () {
       async function fetchData() {
@@ -47,7 +45,6 @@ export default function App() {
 
           if (!res.ok) throw new Error("Error Fetching Movies 🔍");
           const data = await res.json();
-          console.log(data);
           if (data.Response == "False") {
             setMovies([]);
             throw new Error("No Result Found");
@@ -70,8 +67,17 @@ export default function App() {
 
   const onSelectMovie = (id) => {
     return () => {
-      selectedId == id ? setSelectedId(null) : setSelectedId(id)
-    }
+      selectedId == id ? setSelectedId(null) : setSelectedId(id);
+    };
+  };
+
+  const onDeleteWatched = (id) => {
+    return () => {
+    console.log('onDeleteWatched')
+      setWatched((cur) => {
+        return cur.filter((watched) => watched.imdbID !== id);
+      });
+    };
   };
 
   return (
@@ -92,7 +98,7 @@ export default function App() {
             {!isLoading && !error && query && (
               <ul className="list list-movies">
                 {movies.map((movie, i) => (
-                  <Movie movie={movie} key={i} onSelectMovie={onSelectMovie}/>
+                  <Movie movie={movie} key={i} onSelectMovie={onSelectMovie} />
                 ))}
               </ul>
             )}
@@ -129,7 +135,7 @@ export default function App() {
               avgUserRating={avgUserRating}
             >
               {watched.map((movie, i) => (
-                <WatchedMovie movie={movie} key={i} />
+                <WatchedMovie movie={movie} key={i} onDeleteWatched={onDeleteWatched}/>
               ))}
             </WatchedMovieList>
           )}
