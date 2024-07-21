@@ -26,8 +26,16 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
+
+  useEffect(function () {
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Escape") setSelectedId(null);
+    });
+  }, []);
+
   useEffect(
     function () {
+      const controller = new AbortController();
       async function fetchData() {
         try {
           if (!query) {
@@ -38,10 +46,9 @@ export default function App() {
           setError("");
           setIsLoading(true);
           const res = await fetch(
-            `http://www.omdbapi.com/?apikey=897bf7b3&s=${query}`
-          ).catch((err) => {
-            throw new Error("Error Fetching Movies 🔍");
-          });
+            `http://www.omdbapi.com/?apikey=897bf7b3&s=${query}`,
+            { signal: controller.signal }
+          );
 
           if (!res.ok) throw new Error("Error Fetching Movies 🔍");
           const data = await res.json();
@@ -51,12 +58,15 @@ export default function App() {
           }
           setMovies(data.Search);
         } catch (err) {
-          setError(err.message);
+          if (err.name !== "AbortError") setError(err.message);
         } finally {
           setIsLoading(false);
         }
       }
       fetchData();
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );
@@ -73,7 +83,7 @@ export default function App() {
 
   const onDeleteWatched = (id) => {
     return () => {
-    console.log('onDeleteWatched')
+      console.log("onDeleteWatched");
       setWatched((cur) => {
         return cur.filter((watched) => watched.imdbID !== id);
       });
@@ -135,7 +145,11 @@ export default function App() {
               avgUserRating={avgUserRating}
             >
               {watched.map((movie, i) => (
-                <WatchedMovie movie={movie} key={i} onDeleteWatched={onDeleteWatched}/>
+                <WatchedMovie
+                  movie={movie}
+                  key={i}
+                  onDeleteWatched={onDeleteWatched}
+                />
               ))}
             </WatchedMovieList>
           )}
