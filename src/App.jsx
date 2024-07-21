@@ -72,6 +72,10 @@ export default function App() {
   const avgRuntime = average(watched.map((movie) => movie.runtime));
 
 
+  useEffect(function () {
+    localStorage.setItem("watched", JSON.stringify(watched))
+  }, [watched])
+
 
   const onSelectMovie = (id) => {
     return () => {
@@ -81,7 +85,6 @@ export default function App() {
 
   const onDeleteWatched = (id) => {
     return () => {
-      console.log("onDeleteWatched");
       setWatched((cur) => {
         return cur.filter((watched) => watched.imdbID !== id);
       });
