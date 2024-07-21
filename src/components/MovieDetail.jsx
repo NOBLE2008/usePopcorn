@@ -31,6 +31,7 @@ const MovieDetail = ({
     }
   }, [onCloseMovieDetail]);
 
+
   useEffect(
     function () {
       async function getMovieDetails() {
