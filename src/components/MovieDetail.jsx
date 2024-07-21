@@ -17,6 +17,20 @@ const MovieDetail = ({
   // Your code here to fetch and display movie details based on selectedId
   // You can use a movie API like OMDB API or IMDb API for this purpose
 
+  useEffect(function () {
+    const cb = (e) => {
+      if (e.code === "Escape") {
+        onCloseMovieDetail();
+        console.log('added')
+      }
+    }
+    document.addEventListener("keydown", cb);
+
+    return function (){
+      document.removeEventListener("keydown", cb)
+    }
+  }, [onCloseMovieDetail]);
+
   useEffect(
     function () {
       async function getMovieDetails() {

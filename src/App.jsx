@@ -27,12 +27,6 @@ export default function App() {
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
-  useEffect(function () {
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Escape") setSelectedId(null);
-    });
-  }, []);
-
   useEffect(
     function () {
       const controller = new AbortController();
