@@ -13,6 +13,7 @@ import WatchedMovie from "./components/WatchedMovie";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
 import MovieDetail from "./components/MovieDetail";
+import { useMovies } from "./components/useMovies";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -20,52 +21,15 @@ const average = (arr) =>
 export default function App() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState([]);
-  const [error, setError] = useState("");
   const [watched, setWatched] = useState(function () {
     return JSON.parse(localStorage.getItem("watched")) || [];
   });
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
-  useEffect(
-    function () {
-      const controller = new AbortController();
-      async function fetchData() {
-        try {
-          if (!query) {
-            setError("");
-            setMovies([]);
-            return;
-          }
-          setError("");
-          setIsLoading(true);
-          const res = await fetch(
-            `http://www.omdbapi.com/?apikey=897bf7b3&s=${query}`,
-            { signal: controller.signal }
-          );
-
-          if (!res.ok) throw new Error("Error Fetching Movies 🔍");
-          const data = await res.json();
-          if (data.Response == "False") {
-            setMovies([]);
-            throw new Error("No Result Found");
-          }
-          setMovies(data.Search);
-        } catch (err) {
-          if (err.name !== "AbortError") setError(err.message);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-      fetchData();
-      return function () {
-        controller.abort();
-      };
-    },
-    [query]
-  );
+  const { movies, isLoading, error } = useMovies(query, () => {
+    setSelectedId(null)
+  });
 
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
