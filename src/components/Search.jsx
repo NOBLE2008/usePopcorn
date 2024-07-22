@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Logo from "./Logo";
 
 const Search = ({query, setQuery}) => {
-  useEffect(() => {
-    const input = document.querySelector('.search')
-    input.focus()
+  const inputEl = useRef(null)
+
+  useEffect(function () {
+    inputEl.current.focus()
   }, [])
+
   return (
     <input
       className="search"
@@ -13,6 +15,7 @@ const Search = ({query, setQuery}) => {
       placeholder="Search movies..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
+      ref={inputEl}
     />
   );
 };
