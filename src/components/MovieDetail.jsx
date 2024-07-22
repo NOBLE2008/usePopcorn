@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import StarRating from "./StarRating";
+import { useKey } from "./useKey";
 
 const MovieDetail = ({
   selectedId,
@@ -17,20 +18,12 @@ const MovieDetail = ({
   // Your code here to fetch and display movie details based on selectedId
   // You can use a movie API like OMDB API or IMDb API for this purpose
 
-  useEffect(function () {
-    const cb = (e) => {
-      if (e.code === "Escape") {
-        onCloseMovieDetail();
-        console.log('added')
-      }
+  useKey("keydown", (e) => {
+    if (e.code === "Escape") {
+      onCloseMovieDetail();
+      console.log("added");
     }
-    document.addEventListener("keydown", cb);
-
-    return function (){
-      document.removeEventListener("keydown", cb)
-    }
-  }, [onCloseMovieDetail]);
-
+  });
 
   useEffect(
     function () {
@@ -67,14 +60,17 @@ const MovieDetail = ({
     Director: director,
   } = movie;
 
-  useEffect(function (){
-    if(!title) return;
-    document.title = `Movie | ${title}`
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
 
-    return function (){
-        document.title = "usePopcorn"
-    }
-  }, [title])
+      return function () {
+        document.title = "usePopcorn";
+      };
+    },
+    [title]
+  );
 
   const handleAdd = () => {
     setWatched((cur) => {
