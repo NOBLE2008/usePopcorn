@@ -25,7 +25,9 @@ const WatchedMovieList = ({
             <div>
               <p>
                 <span>#️⃣</span>
-                <span>{watched.length} {watched.length > 1 ? 'movies': 'movie'}</span>
+                <span>
+                  {watched.length} {watched.length > 1 ? "movies" : "movie"}
+                </span>
               </p>
               <p>
                 <span>⭐️</span>
