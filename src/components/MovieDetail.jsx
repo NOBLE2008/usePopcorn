@@ -21,7 +21,6 @@ const MovieDetail = ({
   useKey("keydown", (e) => {
     if (e.code === "Escape") {
       onCloseMovieDetail();
-      console.log("added");
     }
   });
 
