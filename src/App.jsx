@@ -23,7 +23,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
-  const [watched, setWatched] = useState(function (){
+  const [watched, setWatched] = useState(function () {
     return JSON.parse(localStorage.getItem("watched")) || [];
   });
   const [isOpen1, setIsOpen1] = useState(true);
@@ -71,11 +71,12 @@ export default function App() {
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
 
-
-  useEffect(function () {
-    localStorage.setItem("watched", JSON.stringify(watched))
-  }, [watched])
-
+  useEffect(
+    function () {
+      localStorage.setItem("watched", JSON.stringify(watched));
+    },
+    [watched]
+  );
 
   const onSelectMovie = (id) => {
     return () => {
